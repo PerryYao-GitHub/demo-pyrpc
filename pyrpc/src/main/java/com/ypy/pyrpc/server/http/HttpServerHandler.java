@@ -1,6 +1,6 @@
 package com.ypy.pyrpc.server.http;
 
-import com.ypy.pyrpc.app.LocalRegistry;
+import com.ypy.pyrpc.app.RpcLocalRegistry;
 import com.ypy.pyrpc.app.RpcApplication;
 import com.ypy.pyrpc.model.RpcRequest;
 import com.ypy.pyrpc.model.RpcResponse;
@@ -32,7 +32,7 @@ public class HttpServerHandler implements Handler<HttpServerRequest> {
                 rpcResponse.setMsg("RPC request is null");
             } else {
                 try {
-                    Class<?> serviceImpl = LocalRegistry.getServiceImpl(rpcRequest.getServiceName());
+                    Class<?> serviceImpl = RpcLocalRegistry.getServiceImpl(rpcRequest.getServiceName());
                     Method method = serviceImpl.getMethod(rpcRequest.getMethodName(), rpcRequest.getParameterTypes());
                     Object result = method.invoke(serviceImpl.newInstance(), rpcRequest.getArgs());
 

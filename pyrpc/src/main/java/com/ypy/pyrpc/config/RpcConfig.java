@@ -22,18 +22,4 @@ public class RpcConfig {
     private boolean mock = false;
     private String serializer = SerializerKeys.JDK; // serializerKey
     private RegistryConfig registryConfig = new RegistryConfig();
-
-    public static RpcConfig loadConfig(String prefix, String env) {
-        StringBuilder configFileBuilder = new StringBuilder("application");
-        if (StrUtil.isNotBlank(env)) configFileBuilder.append("-").append(env);
-        configFileBuilder.append(".properties");
-        Props props = new Props(configFileBuilder.toString());
-
-        RpcConfig rpcConfig = props.toBean(RpcConfig.class, prefix);
-        RegistryConfig registryConfig = props.toBean(RegistryConfig.class, prefix + ".registry");
-        rpcConfig.setRegistryConfig(registryConfig);
-        return rpcConfig;
-    }
-
-    public static RpcConfig loadConfig(String prefix) { return loadConfig(prefix, ""); }
 }

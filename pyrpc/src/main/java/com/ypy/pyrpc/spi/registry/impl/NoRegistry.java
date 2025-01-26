@@ -18,8 +18,8 @@ public class NoRegistry implements Registry {
     public void unregister(ServiceMetaInfo serviceMetaInfo) throws Exception {}
 
     @Override
-    public List<ServiceMetaInfo> serviceDiscovery(String serviceKey) {
-        String[] serviceNameAndVersion = serviceKey.split(":");
+    public List<ServiceMetaInfo> serviceDiscovery(String serviceNameVer) {
+        String[] serviceNameAndVersion = serviceNameVer.split(":");
         ServiceMetaInfo serviceMetaInfo = ServiceMetaInfo.builder()
                 .serviceName(serviceNameAndVersion[0])
                 .serviceVersion(serviceNameAndVersion[1])
@@ -36,5 +36,5 @@ public class NoRegistry implements Registry {
     public void heartBeat() {}
 
     @Override
-    public void watch(String serviceNodeKey) {}
+    public void watch(String fullRegistryServiceKey, String serviceNameVer) {}
 }

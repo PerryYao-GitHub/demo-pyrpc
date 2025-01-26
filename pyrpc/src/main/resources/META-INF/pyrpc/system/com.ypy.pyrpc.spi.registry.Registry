@@ -1,1 +1,2 @@
 no=com.ypy.pyrpc.spi.registry.impl.NoRegistry
+etcd=com.ypy.pyrpc.spi.registry.impl.EtcdRegistry

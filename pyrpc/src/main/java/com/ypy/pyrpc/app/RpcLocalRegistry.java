@@ -3,7 +3,7 @@ package com.ypy.pyrpc.app;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class LocalRegistry {
+public class RpcLocalRegistry {
     private static final Map<String, Class<?>> registeredServiceImpl = new ConcurrentHashMap<String, Class<?>>();
 
     public static void register(String serviceName, Class<?> serviceImpl) {

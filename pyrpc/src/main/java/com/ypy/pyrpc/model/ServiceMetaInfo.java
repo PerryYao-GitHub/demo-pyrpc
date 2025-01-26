@@ -17,16 +17,28 @@ public class ServiceMetaInfo {
     private String serviceHost;
     private int servicePost;
 
-    public String getServiceKey() {
+    /**
+     * ServiceNameVersion: com....UserService:1.0.0
+     * @return
+     */
+    public String getServiceNameVer() {
         return String.format("%s:%s", serviceName, serviceVersion);
     }
 
-    public static String serviceKey(String serviceName, String serviceVersion) { return String.format("%s:%s", serviceName, serviceVersion); }
+    public static String serviceNameVer(String serviceName, String serviceVersion) { return String.format("%s:%s", serviceName, serviceVersion); }
 
-    public String getServiceNodeKey() {
-        return String.format("%s/%s:%s", getServiceKey(), serviceHost, servicePost);
+    /**
+     * ServiceNameVersionAddress: com....UserService:1.0.0/http://127.0.0.1:8080
+     * @return
+     */
+    public String getServiceNameVerAddr() {
+        return String.format("%s/%s:%s", getServiceNameVer(), serviceHost, servicePost);
     }
 
+    /**
+     * ServiceAddress: http://127.0.0.1:8080
+     * @return
+     */
     public String getServiceAddr() {
         String addr = String.format("%s:%s", serviceHost, servicePost);
         if (!StrUtil.contains(addr, "http")) addr = "http://" + addr;

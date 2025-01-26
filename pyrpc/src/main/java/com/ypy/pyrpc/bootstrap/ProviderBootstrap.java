@@ -1,6 +1,6 @@
 package com.ypy.pyrpc.bootstrap;
 
-import com.ypy.pyrpc.app.LocalRegistry;
+import com.ypy.pyrpc.app.RpcLocalRegistry;
 import com.ypy.pyrpc.app.RpcApplication;
 import com.ypy.pyrpc.app.RpcConstant;
 import com.ypy.pyrpc.config.RpcConfig;
@@ -20,7 +20,7 @@ public class ProviderBootstrap {
         final RpcConfig rpcConfig = RpcApplication.getRpcConfig();
 
         for (ServiceRegisterInfo<?> serviceRegisterInfo : serviceRegisterInfoList) {
-            LocalRegistry.register(serviceRegisterInfo.getServiceName(), serviceRegisterInfo.getImplClass());
+            RpcLocalRegistry.register(serviceRegisterInfo.getServiceName(), serviceRegisterInfo.getImplClass());
 
             RpcConfig.RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
             Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
