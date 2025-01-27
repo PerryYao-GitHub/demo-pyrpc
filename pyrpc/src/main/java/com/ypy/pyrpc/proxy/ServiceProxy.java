@@ -8,12 +8,15 @@ import com.ypy.pyrpc.model.RpcResponse;
 import com.ypy.pyrpc.model.ServiceMetaInfo;
 import com.ypy.pyrpc.server.RpcClient;
 import com.ypy.pyrpc.server.RpcClientFactory;
+import com.ypy.pyrpc.spi.loadbalancer.Loadbalancer;
+import com.ypy.pyrpc.spi.loadbalancer.LoadbalancerFactory;
 import com.ypy.pyrpc.spi.registry.Registry;
 import com.ypy.pyrpc.spi.registry.RegistryFactory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.util.List;
+import java.util.Map;
 
 public class ServiceProxy implements InvocationHandler {
     @Override
@@ -29,16 +32,14 @@ public class ServiceProxy implements InvocationHandler {
         Registry registry = RegistryFactory.getInstance(rpcConfig.getRegistryConfig().getRegistry());
 
         // todo: service version
-        List<ServiceMetaInfo> serviceMetaInfoList = registry.serviceDiscovery(ServiceMetaInfo.serviceNameVer(serviceName, RpcConstant.DEFAULT_SERVICE_VERSION));
 
-        ServiceMetaInfo serviceMetaInfo = serviceMetaInfoList.get(0);
+        String serviceNameVer = ServiceMetaInfo.serviceNameVer(serviceName, RpcConstant.DEFAULT_SERVICE_VERSION);
+        List<ServiceMetaInfo> serviceMetaInfoList = registry.serviceDiscovery(serviceNameVer);
 
-        // todo
-        // http
-        // RpcResponse rpcResponse = HttpClient.doRequest(rpcRequest, serviceMetaInfo);
+        Loadbalancer loadbalancer = LoadbalancerFactory.getInstance(RpcApplication.getRpcConfig().getLoadbalancer());
+        Map<String, Object> context = Map.of("serviceNameVer", serviceNameVer); // todo
+        ServiceMetaInfo serviceMetaInfo = loadbalancer.select(serviceMetaInfoList, context);
 
-        // tcp
-        // RpcResponse rpcResponse = TcpClient.doRequest(rpcRequest, serviceMetaInfo);
         RpcClient rpcClient = RpcClientFactory.getInstance(RpcApplication.getRpcConfig().getServerType());
         RpcResponse rpcResponse = rpcClient.doRequest(rpcRequest, serviceMetaInfo);
         return rpcResponse.getData();

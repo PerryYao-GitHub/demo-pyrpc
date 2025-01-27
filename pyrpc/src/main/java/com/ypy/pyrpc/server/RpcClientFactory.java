@@ -1,5 +1,6 @@
 package com.ypy.pyrpc.server;
 
+import com.ypy.pyrpc.server.http.HttpClient;
 import com.ypy.pyrpc.server.tcp.TcpClient;
 
 import java.util.HashMap;
@@ -10,7 +11,7 @@ public class RpcClientFactory {
 
     static {
         clientMap.put(RpcServerTypeKeys.TCP, new TcpClient());
-        clientMap.put(RpcServerTypeKeys.HTTP, null);
+        clientMap.put(RpcServerTypeKeys.HTTP, new HttpClient());
     }
 
     public static RpcClient getInstance(String implClassKey) { return clientMap.get(implClassKey); }

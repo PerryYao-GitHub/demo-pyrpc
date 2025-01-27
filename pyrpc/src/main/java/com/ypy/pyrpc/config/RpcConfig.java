@@ -1,6 +1,7 @@
 package com.ypy.pyrpc.config;
 
 import com.ypy.pyrpc.server.RpcServerTypeKeys;
+import com.ypy.pyrpc.spi.loadbalancer.LoadbalancerKeys;
 import com.ypy.pyrpc.spi.registry.RegistryKeys;
 import com.ypy.pyrpc.spi.serializer.SerializerKeys;
 import lombok.Data;
@@ -22,4 +23,5 @@ public class RpcConfig {
     private boolean mock = false;
     private RegistryConfig registryConfig = new RegistryConfig();
     private String serializer = SerializerKeys.JDK; // serializerKey
+    private String loadbalancer = LoadbalancerKeys.ROUND_ROBIN;
 }

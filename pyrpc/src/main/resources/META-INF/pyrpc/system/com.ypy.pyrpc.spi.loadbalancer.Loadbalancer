@@ -1,0 +1,3 @@
+round-robin=com.ypy.pyrpc.spi.loadbalancer.impl.RoundRobinLoadbalancer
+random=com.ypy.pyrpc.spi.loadbalancer.impl.RandomLoadbalancer
+consistent-hash=com.ypy.pyrpc.spi.loadbalancer.impl.ConsistentHashLoadbalancer
