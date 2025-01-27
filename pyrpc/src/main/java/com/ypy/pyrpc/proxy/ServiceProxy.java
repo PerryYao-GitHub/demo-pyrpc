@@ -6,7 +6,8 @@ import com.ypy.pyrpc.config.RpcConfig;
 import com.ypy.pyrpc.model.RpcRequest;
 import com.ypy.pyrpc.model.RpcResponse;
 import com.ypy.pyrpc.model.ServiceMetaInfo;
-import com.ypy.pyrpc.server.tcp.TcpClient;
+import com.ypy.pyrpc.server.RpcClient;
+import com.ypy.pyrpc.server.RpcClientFactory;
 import com.ypy.pyrpc.spi.registry.Registry;
 import com.ypy.pyrpc.spi.registry.RegistryFactory;
 
@@ -37,7 +38,9 @@ public class ServiceProxy implements InvocationHandler {
         // RpcResponse rpcResponse = HttpClient.doRequest(rpcRequest, serviceMetaInfo);
 
         // tcp
-        RpcResponse rpcResponse = TcpClient.doRequest(rpcRequest, serviceMetaInfo);
+        // RpcResponse rpcResponse = TcpClient.doRequest(rpcRequest, serviceMetaInfo);
+        RpcClient rpcClient = RpcClientFactory.getInstance(RpcApplication.getRpcConfig().getServerType());
+        RpcResponse rpcResponse = rpcClient.doRequest(rpcRequest, serviceMetaInfo);
         return rpcResponse.getData();
     }
 }

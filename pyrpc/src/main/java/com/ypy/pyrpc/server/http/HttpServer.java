@@ -3,7 +3,6 @@ package com.ypy.pyrpc.server.http;
 import com.ypy.pyrpc.server.RpcServer;
 import io.vertx.core.Vertx;
 
-@Deprecated
 public class HttpServer implements RpcServer {
     @Override
     public void doStart(int port) {

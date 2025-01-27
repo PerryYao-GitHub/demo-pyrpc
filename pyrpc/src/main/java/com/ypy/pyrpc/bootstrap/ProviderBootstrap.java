@@ -7,7 +7,7 @@ import com.ypy.pyrpc.config.RpcConfig;
 import com.ypy.pyrpc.model.ServiceRegisterInfo;
 import com.ypy.pyrpc.model.ServiceMetaInfo;
 import com.ypy.pyrpc.server.RpcServer;
-import com.ypy.pyrpc.server.tcp.TcpServer;
+import com.ypy.pyrpc.server.RpcServerFactory;
 import com.ypy.pyrpc.spi.registry.Registry;
 import com.ypy.pyrpc.spi.registry.RegistryFactory;
 
@@ -38,7 +38,7 @@ public class ProviderBootstrap {
             }
         }
 
-        RpcServer rpcServer = new TcpServer(); // todo
+        RpcServer rpcServer = RpcServerFactory.getInstance(RpcApplication.getRpcConfig().getServerType());
         rpcServer.doStart(rpcConfig.getServerPort());
     }
 }

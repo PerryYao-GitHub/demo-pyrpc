@@ -5,7 +5,6 @@ import com.ypy.pyrpc.app.RpcApplication;
 import com.ypy.pyrpc.model.RpcRequest;
 import com.ypy.pyrpc.model.RpcResponse;
 import com.ypy.pyrpc.model.ServiceMetaInfo;
-import com.ypy.pyrpc.server.RpcClient;
 import com.ypy.pyrpc.server.tcp.protocol.*;
 import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
@@ -17,15 +16,20 @@ import java.io.IOException;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
-public class TcpClient implements RpcClient {
-    private static Vertx vertx = Vertx.vertx(); // signal instance
+@Deprecated
+public class TcpClientUtil {
+//    private static Vertx vertx = Vertx.vertx();
 
-    private static NetClient netClient = vertx.createNetClient(new NetClientOptions()); // signal instance
+//    private static NetClient netClient = vertx.createNetClient(new NetClientOptions());
 
-    @Override
-    public RpcResponse doRequest(RpcRequest rpcRequest, ServiceMetaInfo serviceMetaInfo) throws ExecutionException, InterruptedException {
+    public static RpcResponse doRequest(
+            RpcRequest rpcRequest,
+            ServiceMetaInfo serviceMetaInfo
+    ) throws InterruptedException, ExecutionException {
+        Vertx vertx = Vertx.vertx();
         CompletableFuture<RpcResponse> responseCompletableFuture = new CompletableFuture<>();
 
+        NetClient netClient = vertx.createNetClient();
         netClient.connect(
                 serviceMetaInfo.getServicePost(),
                 serviceMetaInfo.getServiceHost(),
@@ -71,6 +75,8 @@ public class TcpClient implements RpcClient {
         );
 
         RpcResponse rpcResponse = responseCompletableFuture.get();
+        // close connect
+        netClient.close();
         return rpcResponse;
     }
 }

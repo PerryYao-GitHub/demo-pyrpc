@@ -6,13 +6,17 @@ import com.ypy.pyrpc.app.RpcApplication;
 import com.ypy.pyrpc.model.RpcRequest;
 import com.ypy.pyrpc.model.RpcResponse;
 import com.ypy.pyrpc.model.ServiceMetaInfo;
-import com.ypy.pyrpc.server.RpcClient;
 import com.ypy.pyrpc.spi.serializer.Serializer;
 import com.ypy.pyrpc.spi.serializer.SerializerFactory;
 
-public class HttpClient implements RpcClient {
-    @Override
-    public RpcResponse doRequest(RpcRequest rpcRequest, ServiceMetaInfo serviceMetaInfo) throws Exception {
+import java.io.IOException;
+
+@Deprecated
+public class HttpClientUtil {
+    public static RpcResponse doRequest(
+            RpcRequest rpcRequest,
+            ServiceMetaInfo serviceMetaInfo
+    ) throws IOException {
         Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
         byte[] bodyBytes = null;
         bodyBytes = serializer.serialize(rpcRequest);

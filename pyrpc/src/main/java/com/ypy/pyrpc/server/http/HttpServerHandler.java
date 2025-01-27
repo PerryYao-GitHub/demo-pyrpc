@@ -13,7 +13,6 @@ import io.vertx.core.http.HttpServerResponse;
 
 import java.lang.reflect.Method;
 
-@Deprecated
 public class HttpServerHandler implements Handler<HttpServerRequest> {
     @Override
     public void handle(HttpServerRequest request) {

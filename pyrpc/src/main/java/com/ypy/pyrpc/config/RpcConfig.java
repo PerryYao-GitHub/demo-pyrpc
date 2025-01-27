@@ -1,5 +1,6 @@
 package com.ypy.pyrpc.config;
 
+import com.ypy.pyrpc.server.RpcServerTypeKeys;
 import com.ypy.pyrpc.spi.registry.RegistryKeys;
 import com.ypy.pyrpc.spi.serializer.SerializerKeys;
 import lombok.Data;
@@ -17,7 +18,8 @@ public class RpcConfig {
 
     private String serverHost = "127.0.0.1";
     private int serverPort = 8080;
+    private String serverType = RpcServerTypeKeys.TCP;
     private boolean mock = false;
-    private String serializer = SerializerKeys.JDK; // serializerKey
     private RegistryConfig registryConfig = new RegistryConfig();
+    private String serializer = SerializerKeys.JDK; // serializerKey
 }
