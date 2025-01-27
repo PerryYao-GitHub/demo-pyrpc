@@ -1,1 +1,3 @@
 jdk=com.ypy.pyrpc.spi.serializer.impl.JdkSerializer
+json=com.ypy.pyrpc.spi.serializer.impl.JsonSerializer
+kryo=com.ypy.pyrpc.spi.serializer.impl.KryoSerializer

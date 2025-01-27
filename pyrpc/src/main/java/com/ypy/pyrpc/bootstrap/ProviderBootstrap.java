@@ -7,7 +7,7 @@ import com.ypy.pyrpc.config.RpcConfig;
 import com.ypy.pyrpc.model.ServiceRegisterInfo;
 import com.ypy.pyrpc.model.ServiceMetaInfo;
 import com.ypy.pyrpc.server.RpcServer;
-import com.ypy.pyrpc.server.http.VertxHttpServer;
+import com.ypy.pyrpc.server.tcp.TcpServer;
 import com.ypy.pyrpc.spi.registry.Registry;
 import com.ypy.pyrpc.spi.registry.RegistryFactory;
 
@@ -20,12 +20,12 @@ public class ProviderBootstrap {
         final RpcConfig rpcConfig = RpcApplication.getRpcConfig();
 
         for (ServiceRegisterInfo<?> serviceRegisterInfo : serviceRegisterInfoList) {
-            RpcLocalRegistry.register(serviceRegisterInfo.getServiceName(), serviceRegisterInfo.getImplClass());
+            RpcLocalRegistry.register(serviceRegisterInfo.getServiceInterfaceName(), serviceRegisterInfo.getServiceImplClass());
 
             RpcConfig.RegistryConfig registryConfig = rpcConfig.getRegistryConfig();
             Registry registry = RegistryFactory.getInstance(registryConfig.getRegistry());
             ServiceMetaInfo serviceMetaInfo = ServiceMetaInfo.builder()
-                    .serviceName(serviceRegisterInfo.getServiceName())
+                    .serviceName(serviceRegisterInfo.getServiceInterfaceName())
                     .serviceVersion(RpcConstant.DEFAULT_SERVICE_VERSION) // todo
                     .serviceHost(rpcConfig.getServerHost())
                     .servicePost(rpcConfig.getServerPort())
@@ -34,11 +34,11 @@ public class ProviderBootstrap {
             try {
                 registry.register(serviceMetaInfo);
             } catch (Exception e) {
-                throw new RuntimeException(serviceRegisterInfo.getServiceName() + " register failed", e);
+                throw new RuntimeException(serviceRegisterInfo.getServiceInterfaceName() + " register failed", e);
             }
         }
 
-        RpcServer rpcServer = new VertxHttpServer();
+        RpcServer rpcServer = new TcpServer(); // todo
         rpcServer.doStart(rpcConfig.getServerPort());
     }
 }

@@ -1,7 +1,5 @@
 package com.ypy.pyrpc.config;
 
-import cn.hutool.core.util.StrUtil;
-import cn.hutool.setting.dialect.Props;
 import com.ypy.pyrpc.spi.registry.RegistryKeys;
 import com.ypy.pyrpc.spi.serializer.SerializerKeys;
 import lombok.Data;

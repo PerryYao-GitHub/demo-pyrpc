@@ -1,7 +1,6 @@
 package com.ypy.pyrpc.model;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,6 +8,6 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ServiceRegisterInfo<T> {
-    private String serviceName;
-    private Class<? extends T> implClass;
+    private String serviceInterfaceName;
+    private Class<? extends T> serviceImplClass;
 }
