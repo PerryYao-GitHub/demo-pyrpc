@@ -1,0 +1,2 @@
+no=com.ypy.pyrpc.spi.retry.impl.NoRetry
+fixed-interval=com.ypy.pyrpc.spi.retry.impl.FixedIntervalRetry

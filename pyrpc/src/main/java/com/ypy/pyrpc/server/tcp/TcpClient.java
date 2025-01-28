@@ -23,7 +23,7 @@ public class TcpClient implements RpcClient {
     private static NetClient netClient = vertx.createNetClient(new NetClientOptions()); // signal instance
 
     @Override
-    public RpcResponse doRequest(RpcRequest rpcRequest, ServiceMetaInfo serviceMetaInfo) throws ExecutionException, InterruptedException {
+    public RpcResponse request(RpcRequest rpcRequest, ServiceMetaInfo serviceMetaInfo) throws ExecutionException, InterruptedException {
         CompletableFuture<RpcResponse> responseCompletableFuture = new CompletableFuture<>();
 
         netClient.connect(

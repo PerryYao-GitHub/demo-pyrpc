@@ -24,4 +24,5 @@ public class RpcConfig {
     private RegistryConfig registryConfig = new RegistryConfig();
     private String serializer = SerializerKeys.JDK; // serializerKey
     private String loadbalancer = LoadbalancerKeys.ROUND_ROBIN;
+    private String retry = RegistryKeys.NO;
 }

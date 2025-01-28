@@ -1,6 +1,5 @@
 package com.ypy.pyrpc.model;
 
-import cn.hutool.core.util.StrUtil;
 import com.ypy.pyrpc.app.RpcConstant;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,8 +39,6 @@ public class ServiceMetaInfo {
      * @return
      */
     public String getServiceAddr() {
-        String addr = String.format("%s:%s", serviceHost, servicePost);
-        if (!StrUtil.contains(addr, "http")) addr = "http://" + addr;
-        return addr;
+        return String.format("http://%s:%s", serviceHost, servicePost);
     }
 }

@@ -12,7 +12,7 @@ import com.ypy.pyrpc.spi.serializer.SerializerFactory;
 
 public class HttpClient implements RpcClient {
     @Override
-    public RpcResponse doRequest(RpcRequest rpcRequest, ServiceMetaInfo serviceMetaInfo) throws Exception {
+    public RpcResponse request(RpcRequest rpcRequest, ServiceMetaInfo serviceMetaInfo) throws Exception {
         Serializer serializer = SerializerFactory.getInstance(RpcApplication.getRpcConfig().getSerializer());
         byte[] bodyBytes = null;
         bodyBytes = serializer.serialize(rpcRequest);

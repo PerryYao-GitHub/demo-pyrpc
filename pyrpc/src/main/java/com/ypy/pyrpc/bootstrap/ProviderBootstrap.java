@@ -39,6 +39,6 @@ public class ProviderBootstrap {
         }
 
         RpcServer rpcServer = RpcServerFactory.getInstance(RpcApplication.getRpcConfig().getServerType());
-        rpcServer.doStart(rpcConfig.getServerPort());
+        rpcServer.start(rpcConfig.getServerPort());
     }
 }

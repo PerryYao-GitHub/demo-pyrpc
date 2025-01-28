@@ -6,7 +6,7 @@ import io.vertx.core.net.NetServer;
 
 public class TcpServer implements RpcServer {
     @Override
-    public void doStart(int port) {
+    public void start(int port) {
         Vertx vertx = Vertx.vertx();
         NetServer server = vertx.createNetServer();
         server.connectHandler(new TcpServerHandler());
