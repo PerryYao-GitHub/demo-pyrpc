@@ -1,0 +1,2 @@
+fail-fast=com.ypy.pyrpc.spi.tolerance.impl.FailFastTolerance
+fail-safe=com.ypy.pyrpc.spi.tolerance.impl.FailSafeTolerance

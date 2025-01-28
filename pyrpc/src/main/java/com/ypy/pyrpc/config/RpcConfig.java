@@ -4,6 +4,7 @@ import com.ypy.pyrpc.server.RpcServerTypeKeys;
 import com.ypy.pyrpc.spi.loadbalancer.LoadbalancerKeys;
 import com.ypy.pyrpc.spi.registry.RegistryKeys;
 import com.ypy.pyrpc.spi.serializer.SerializerKeys;
+import com.ypy.pyrpc.spi.tolerance.ToleranceKeys;
 import lombok.Data;
 
 @Data
@@ -25,4 +26,5 @@ public class RpcConfig {
     private String serializer = SerializerKeys.JDK; // serializerKey
     private String loadbalancer = LoadbalancerKeys.ROUND_ROBIN;
     private String retry = RegistryKeys.NO;
+    private String tolerance = ToleranceKeys.FAIL_FAST;
 }

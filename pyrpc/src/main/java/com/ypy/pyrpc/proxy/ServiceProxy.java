@@ -14,6 +14,8 @@ import com.ypy.pyrpc.spi.registry.Registry;
 import com.ypy.pyrpc.spi.registry.RegistryFactory;
 import com.ypy.pyrpc.spi.retry.Retry;
 import com.ypy.pyrpc.spi.retry.RetryFactory;
+import com.ypy.pyrpc.spi.tolerance.Tolerance;
+import com.ypy.pyrpc.spi.tolerance.ToleranceFactory;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -47,7 +49,8 @@ public class ServiceProxy implements InvocationHandler {
             Retry retry = RetryFactory.getInstance(RpcApplication.getRpcConfig().getRetry());
             rpcResponse = retry.retry(() -> rpcClient.request(rpcRequest, serviceMetaInfo));
         } catch (Exception e) {
-            rpcResponse = new RpcResponse();
+            Tolerance tolerance = ToleranceFactory.getInstance(RpcApplication.getRpcConfig().getTolerance());
+            rpcResponse = tolerance.tolerate(e, context);
         }
         return rpcResponse.getData();
     }
