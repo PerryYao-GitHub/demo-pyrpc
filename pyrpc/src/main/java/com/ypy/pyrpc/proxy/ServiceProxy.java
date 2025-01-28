@@ -2,7 +2,6 @@ package com.ypy.pyrpc.proxy;
 
 import com.ypy.pyrpc.app.RpcApplication;
 import com.ypy.pyrpc.app.RpcConstant;
-import com.ypy.pyrpc.config.RpcConfig;
 import com.ypy.pyrpc.model.RpcRequest;
 import com.ypy.pyrpc.model.RpcResponse;
 import com.ypy.pyrpc.model.ServiceMetaInfo;

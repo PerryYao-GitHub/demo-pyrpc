@@ -18,14 +18,14 @@ public class SpiLoader {
      * className means full name, e.g. com.ypy.pyrpc.spi.serializer.Serializer
      * classKey means a short key, representing some implClass, e.g. jdk=JdkSerializer
      */
-    private static Map<String, Map<String, Class<?>>> spiMap = new ConcurrentHashMap<>();
+    private static final Map<String, Map<String, Class<?>>> spiMap = new ConcurrentHashMap<>();
 
     /**
      * cache of instance, avoid repeat "new"
      * {implClassName: implClassInstance}
      * full-name, not a key
      */
-    private static Map<String, Object> implClassInstanceCache = new ConcurrentHashMap<String, Object>();
+    private static final Map<String, Object> implClassInstanceCache = new ConcurrentHashMap<String, Object>();
     private static final String RPC_SYSTEM_SPI_DIR = "META-INF/pyrpc/system/";
     private static final String RPC_CUSTOM_SPI_DIR = "META-INF/pyrpc/custom/";
     private static final String[] SCAN_DIRS = new String[]{RPC_SYSTEM_SPI_DIR, RPC_CUSTOM_SPI_DIR};
