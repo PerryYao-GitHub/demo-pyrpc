@@ -17,13 +17,13 @@ public class TcpServerHandler implements Handler<NetSocket> {
     @Override
     public void handle(NetSocket netSocket) {
         TcpBufferHandlerWrapper bufferHandlerWrapper = new TcpBufferHandlerWrapper(buffer -> {
-            Protocol<RpcRequest> protocol;
+            Protocol<RpcRequest> requestProtocol;
             try {
-                protocol = (Protocol<RpcRequest>) ProtocolUtils.decode(buffer);
+                requestProtocol = (Protocol<RpcRequest>) ProtocolUtils.decode(buffer);
             } catch (Exception e) {
                 throw new RuntimeException("Decode Err", e);
             }
-            RpcRequest rpcRequest = protocol.getBody();
+            RpcRequest rpcRequest = requestProtocol.getBody();
             RpcResponse rpcResponse = new RpcResponse();
             try {
                 Class<?> serviceImpl = RpcLocalRegistry.getServiceImpl(rpcRequest.getServiceName());
@@ -39,7 +39,7 @@ public class TcpServerHandler implements Handler<NetSocket> {
                 rpcResponse.setException(e);
             }
 
-            Protocol.Header header = protocol.getHeader();
+            Protocol.Header header = requestProtocol.getHeader();
             header.setType(ProtocolTypeEnum.RESPONSE.getCode());
             Protocol<RpcResponse> responseProtocol = new Protocol<>(header, rpcResponse);
             try {
