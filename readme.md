@@ -86,25 +86,23 @@
 
 :star:**RPC 配置, 启动等全局组件 (`com.ypy.pyrpc.app.RpcApplication`, `com.ypy.pyrpc.config`)**
 
-本框架的配置信息可以写入`resources/application.properties`, 完整的配置信息如下:
+本框架的配置信息可以写入`resources/application.properties`, 完整的配置信息如下 (`|`分割了可供选择的默认实现类的 key):
 
 ```
 pyrpc.serverHost=127.0.0.1
 pyrpc.serverPort=8081
-pyrpc.serverType=http || tcp
-pyrpc.mock=false || true
-pyrpc.registry.registry=no || etcd
-pyrpc.registry.addr=http://127.0.0.1:2375
+pyrpc.serverType=http | tcp
+pyrpc.mock=false | true
+pyrpc.registry.registry=no | etcd
+pyrpc.registry.addr=http://127.0.0.1:2379 # etcd default port: 2379
 pyrpc.registry.username=xxx
 pyrpc.registry.password=yyy
 pyrpc.registry.timeout=10000
-pyrpc.serializer=jdk || json || kryo
-pyrpc.loadbalancer=round-robin || random || consistent-hash
-pyrpc.retry=no || fixed-interval
-pyrpc.tolerance=fail-fast || fail-safe
+pyrpc.serializer=jdk | json | kryo
+pyrpc.loadbalancer=round-robin | random | consistent-hash
+pyrpc.retry=no | fixed-interval
+pyrpc.tolerance=fail-fast | fail-safe
 ```
-
-*\*其中 || 分割了可供选择的默认实现类的 key*
 
 在 `resources/META-INF/prrpc/` 中, 有 `custom/` 和 `system/` 两个目录, 其中 `system/` 中的文件如下:
 
